@@ -1,0 +1,10 @@
+| Parte         | Tecnología                |
+| ------------- | ------------------------- |
+| App móvil     | **Kotlin**                |
+| IDE           | **Android Studio**        |
+| Interfaz      | **Jetpack Compose**       |
+| GPS           | Android Location Services |
+| Mapa          | Lo decidimos ahora        |
+| Backend       | Lo construiremos después  |
+| Base de datos | **Oracle**, que ya tienes |
+| Comunicación  | API REST                  |

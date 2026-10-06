@@ -1,0 +1,141 @@
+🥾 Proyecto Senderismo — Estado actual
+1. Idea general
+
+La aplicación será inicialmente una especie de “Wikiloc básico”, pero con la idea de evolucionarla posteriormente hacia una aplicación de exploración de naturaleza tipo Pokédex.
+
+La visión completa a largo plazo incluye cosas como:
+
+🗺️ Rutas y navegación GPS.
+📍 Posición del usuario en tiempo real.
+🌿 Descubrimiento de flora y fauna.
+📸 Fotografías e identificación mediante IA.
+📖 Pokédex personal.
+🎯 Objetivos y recompensas.
+👥 Comunidad/social.
+🤝 Expediciones cooperativas.
+🌦️ Información contextual del entorno.
+🏆 Progresión, XP, etc.
+
+Pero nada de eso forma parte de la Alpha 0.1.
+
+🟢 Hito 1 — Base técnica
+
+El objetivo del Hito 1 es conseguir que tengamos la aplicación Android funcionando y preparada para empezar a construir la Alpha 0.1.
+
+Lo que hemos hecho
+Base de datos Oracle
+
+Ya tienes funcionando una base de datos local con:
+
+ZONAS
+  ↓
+RUTAS
+  ↓
+PUNTOS_RUTA
+
+Actualmente tenemos:
+
+1 zona: Parque del Alamillo
+1 ruta
+266 puntos GPS ordenados de la ruta
+
+La ruta tiene información como:
+
+distancia: 2,88 km
+dificultad: Fácil
+tipo: Circular
+desnivel positivo/negativo
+altitud mínima/máxima
+tiempo estimado: 53 min
+coordenadas
+fuente Wikiloc
+
+Los 266 puntos permiten reconstruir el trazado de la ruta.
+
+Arquitectura
+
+Decidimos que la aplicación NO se conectará directamente a Oracle.
+
+La estructura será:
+
+📱 Android
+    ↓
+🌐 API / Backend
+    ↓
+🗄️ Oracle
+
+Esto nos permitirá posteriormente hacer crecer el proyecto sin tener que rehacer la aplicación.
+
+Tecnología móvil
+
+Elegimos:
+
+Kotlin + Android Studio
+
+Y dentro de Android:
+
+Kotlin
+Jetpack Compose
+Android Location Services para ubicación
+API REST para comunicarse con el backend
+Oracle como BD
+
+El proyecto se llama:
+
+SenderismoApp
+
+Package:
+
+com.example.senderismoapp
+
+Configuración:
+
+Kotlin
+API mínima: 26
+Phone and Tablet
+Empty Activity
+🖥️ Entorno de desarrollo
+
+Aquí tuvimos un pequeño obstáculo porque Android Studio está funcionando dentro de una VM de Hyper-V.
+
+Conseguimos resolverlo.
+
+VM
+Develop
+
+Activamos la virtualización anidada de Hyper-V.
+
+Después:
+
+✅ VM arranca correctamente.
+✅ Android Studio funciona.
+✅ Emulador Android funcionando.
+✅ La aplicación se ejecuta en el emulador.
+
+Y actualmente el emulador nos muestra:
+
+Hello Android!
+
+Por tanto, la infraestructura de desarrollo está lista.
+
+📱 Móvil físico
+
+También conseguimos conectar tu OPPO mediante ADB por Wi-Fi.
+
+Actualmente sabemos hacer:
+
+cd "%LOCALAPPDATA%\Android\Sdk\platform-tools"
+adb connect IP:PORT
+adb devices
+
+Y conseguimos que apareciera como:
+
+192.168.1.18:43027    device
+
+Por tanto:
+
+✅ Emulador
+✅ OPPO físico
+✅ Android Studio
+
+están preparados para probar la aplicación.

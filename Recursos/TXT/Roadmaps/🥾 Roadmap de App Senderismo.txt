@@ -1,0 +1,59 @@
+🥾 Roadmap de hitos
+Hito	Título	Objetivo
+Hito 1	🗄️ Base de datos inicial	Definir y crear la estructura de Oracle para zonas, rutas y puntos de ruta, dejando preparada la base para futuras ampliaciones.
+Hito 2	🗺️ Visualización de rutas	Conseguir que la aplicación pueda consultar una ruta de Oracle y dibujarla sobre un mapa, mostrando inicio, final y recorrido completo.
+Hito 3	📍 GPS en tiempo real	Obtener la posición del usuario mediante GPS y mostrarla sobre el mapa mientras realiza la ruta.
+Hito 4	🥾 Seguimiento de la ruta	Comparar la posición del usuario con el recorrido y calcular distancia recorrida, distancia restante, porcentaje completado y progreso.
+Hito 5	⛰️ Información avanzada de la ruta	Incorporar altitud, desnivel, tiempo estimado, tiempo transcurrido, dificultad y perfil de altimetría.
+Hito 6	📌 Puntos de interés	Añadir waypoints como miradores, fuentes, refugios, cruces, zonas peligrosas, puntos de descanso, etc., y mostrarlos en el mapa.
+Hito 7	📡 Modo offline	Conseguir que una ruta pueda descargarse antes de salir y que el usuario pueda navegar y consultar la información sin cobertura.
+Hito 8	🌿 Base de datos de naturaleza	Crear la estructura para almacenar animales, plantas, árboles, hongos y demás especies, junto con su información.
+Hito 9	🗺️ Especies asociadas a rutas	Relacionar las especies con determinadas zonas y rutas para poder indicar al usuario qué puede encontrar durante cada recorrido.
+Hito 10	📸 Sistema de descubrimientos	Permitir que el usuario haga una fotografía y registre un avistamiento/descubrimiento, guardando foto, especie, fecha, ubicación y ruta.
+Hito 11	🤖 Identificación mediante IA	Incorporar reconocimiento de imágenes para que la aplicación pueda proponer qué animal o planta aparece en la fotografía.
+Hito 12	📖 Pokédex personal	Crear la colección del usuario con todas las especies descubiertas, fotografías, información, estadísticas y especies pendientes.
+Hito 13	🎯 Retos y objetivos	Añadir objetivos durante las rutas: “descubre 3 aves”, “fotografía un árbol”, “llega al mirador”, etc.
+Hito 14	⭐ XP, niveles y recompensas	Crear el sistema de gamificación: experiencia, niveles, insignias, logros y recompensas por explorar.
+Hito 15	👤 Perfil del explorador	Crear el perfil donde el usuario pueda consultar rutas, especies, fotografías, XP, logros y estadísticas personales.
+Hito 16	🗺️ Mapa personal de descubrimientos	Mostrar sobre un mapa las rutas realizadas y los lugares donde el usuario ha realizado descubrimientos.
+Hito 17	🌦️ Información contextual	Incorporar información como meteorología, época del año, altitud y ecosistema para adaptar los descubrimientos y recomendaciones.
+Hito 18	🧭 Asistente de exploración	Crear un sistema que indique al usuario qué especies puede encontrar cerca, qué objetivos tiene pendientes y qué zonas pueden ser interesantes.
+Hito 19	👥 Componente social	Añadir amigos, perfiles públicos, rankings, compartir descubrimientos y estadísticas.
+Hito 20	🤝 Expediciones cooperativas	Permitir que varios usuarios realicen una expedición conjunta y compartan objetivos y descubrimientos.
+Hito 21	🌍 Conservación y educación	Incorporar información y retos relacionados con respeto, conservación y conocimiento del entorno natural.
+Hito 22	🥽 Funciones avanzadas	Explorar funcionalidades futuras como realidad aumentada, identificación por sonido, smartwatch, audio-guía, etc.
+Hito 23	🚀 Versión completa	Integrar todos los sistemas, mejorar rendimiento, seguridad, experiencia de usuario y preparar la aplicación para una primera versión pública.
+🔥 Pero yo marcaría 5 grandes etapas
+
+Para que el proyecto no se convierta en algo inmanejable:
+
+ETAPA 1 — 🗺️ HACER QUE FUNCIONE
+
+Hitos 1–7
+Base de datos + mapa + GPS + navegación + offline
+
+ETAPA 2 — 🌿 DARLE CONTENIDO
+
+Hitos 8–12
+Fauna + flora + fotografías + IA + Pokédex
+
+ETAPA 3 — 🎮 CONVERTIRLO EN UN JUEGO
+
+Hitos 13–16
+Retos + XP + recompensas + perfil + mapa personal
+
+ETAPA 4 — 🧠 HACERLO INTELIGENTE
+
+Hitos 17–18
+Meteorología + contexto + recomendaciones + asistente
+
+ETAPA 5 — 🌍 CREAR LA COMUNIDAD
+
+Hitos 19–23
+Social + expediciones + conservación + funciones avanzadas + lanzamiento
+
+Y si tuviera que elegir el primer objetivo realmente importante, sería llegar al final del Hito 4:
+
+“Selecciono una ruta → veo el trazado → pulso comenzar → aparece mi posición GPS → camino → la app sabe por dónde voy y me dice qué porcentaje de la ruta he completado.”
+
+Si eso funciona bien, ya tenemos el núcleo de la aplicación. Todo lo demás se puede ir construyendo encima.

@@ -1,0 +1,25 @@
+1. OPPO: activar Depuración inalámbrica.
+
+2. En “Emparejar dispositivo con código”, obtener IP + puerto y código.
+
+3. En la VM:
+   - cd "%LOCALAPPDATA%\Android\Sdk\platform-tools"
+   - adb pair IP:PUERTO
+
+Introducir el código del móvil.
+
+4. En el OPPO, mirar “Dirección IP y puerto”.
+
+5. En la VM:
+   - adb connect IP:PUERTO
+
+6. Comprobar:
+   - adb devices
+
+--------------------------------------------
+
+Si aparece:
+
+IP:PUERTO    device
+
+✅ Móvil conectado.

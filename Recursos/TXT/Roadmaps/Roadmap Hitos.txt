@@ -1,0 +1,484 @@
+PROYECTO – APP DE SENDERISMO GAMIFICADA / POKÉDEX DE LA NATURALEZA
+ROADMAP TÉCNICO Y FUNCIONAL DE HITOS Versión: 0.1
+
+VISIÓN La aplicación combinará senderismo, navegación GPS, exploración
+de naturaleza, fotografías, identificación de especies, una Pokédex
+personal, retos, XP, niveles, insignias y, posteriormente, funciones
+sociales.
+
+PRINCIPIO DE DESARROLLO Cada hito debe dejar una parte funcional y
+comprobable. No conviene desarrollar toda la idea de golpe. El primer
+objetivo debe ser una ruta real que pueda recorrerse con el móvil.
+
+======================================================================
+ALFA 0.1 – PRIMERA RUTA FUNCIONAL
+======================================================================
+
+Objetivo: Crear una primera versión tipo “Wikiloc propia”, sencilla pero
+funcional.
+
+Flujo: 1. Abrir aplicación. 2. Seleccionar una zona. 3. Ver sus rutas.
+4. Seleccionar una ruta. 5. Consultar información básica. 6. Pulsar
+EMPEZAR. 7. Obtener posición GPS. 8. Guiar al usuario hasta el inicio.
+9. Detectar llegada al inicio. 10. Pulsar COMENZAR RUTA. 11. Mostrar
+trazado y posición en tiempo real. 12. Calcular distancia recorrida y
+restante. 13. Calcular porcentaje. 14. Mostrar tiempo y altitud. 15.
+Detectar llegada al final. 16. Mostrar “¡Ruta completada!” y resumen.
+
+No necesita todavía IA, Pokédex, fauna, flora, rankings ni red social.
+
+El criterio de éxito es poder realizar físicamente una ruta completa sin
+perder el seguimiento.
+
+======================================================================
+HITO 1 – BASE DE DATOS Y RUTA MÍNIMA
+======================================================================
+
+Objetivo: Convertir las tres tablas actuales en una base sólida para el
+prototipo.
+
+Tablas iniciales:
+
+ZONAS - ID_ZONA - NOMBRE - DESCRIPCION - LATITUD_CENTRO -
+LONGITUD_CENTRO - IMAGEN - ACTIVA
+
+RUTAS - ID_RUTA - ID_ZONA - NOMBRE - DESCRIPCION - DIFICULTAD -
+DISTANCIA_KM - TIEMPO_ESTIMADO_MIN - DESNIVEL_POSITIVO -
+DESNIVEL_NEGATIVO - ALTITUD_MIN - ALTITUD_MAX - LATITUD_INICIO -
+LONGITUD_INICIO - LATITUD_FIN - LONGITUD_FIN - IMAGEN - ACTIVA
+
+PUNTOS_RUTA - ID_PUNTO - ID_RUTA - ORDEN - LATITUD - LONGITUD - ALTITUD
+
+Ejemplo: ZONA 1 = Sierra de Guadarrama. RUTA 101 = Ruta de los
+Miradores. PUNTOS_RUTA = 1…250, desde inicio hasta final.
+
+Resultado: La app consulta Oracle, recupera los puntos y dibuja la línea
+de la ruta.
+
+======================================================================
+HITO 2 – MAPA Y NAVEGACIÓN BÁSICA
+======================================================================
+
+Objetivo: Mostrar visualmente la ruta.
+
+Debe permitir: - Ver mapa. - Mostrar inicio. - Mostrar final. - Dibujar
+trazado. - Mostrar posición del usuario. - Centrar mapa en el usuario. -
+Actualizar posición.
+
+Resultado: El usuario ve algo parecido a: ● Tú ╱ ╱ ────────────── 🏁
+
+======================================================================
+HITO 3 – GPS EN TIEMPO REAL Y PROGRESO
+======================================================================
+
+Objetivo: Convertir el mapa estático en un seguimiento real.
+
+Calcular: - Posición actual. - Distancia recorrida. - Distancia
+restante. - Porcentaje. - Tiempo transcurrido. - Velocidad aproximada. -
+Desviación respecto a la ruta.
+
+Ejemplo: 6,4 km recorridos 5,4 km restantes 54 % 1 h 42 min +327 m
+
+Punto importante: El GPS no depende de la cobertura móvil. El reto de la
+falta de Internet está principalmente en disponer de mapas y datos
+previamente descargados.
+
+======================================================================
+HITO 4 – INICIO Y FINAL DE LA RUTA
+======================================================================
+
+Objetivo: Crear el flujo de “llegar al inicio → comenzar → terminar”.
+
+Ejemplo: “Estás a 1,4 km del inicio.” → Ir al inicio.
+
+Cuando el usuario entra en un radio definido, por ejemplo 30–50 m: “¡Has
+llegado al inicio de la ruta!” → COMENZAR RUTA.
+
+Al llegar al final: “¡Ruta completada!” → FINALIZAR.
+
+El radio exacto debe probarse en campo.
+
+======================================================================
+HITO 5 – INFORMACIÓN AVANZADA DE RUTA
+======================================================================
+
+Objetivo: Que el usuario sepa a qué se enfrenta antes de empezar.
+
+Añadir: - Dificultad. - Distancia. - Duración estimada. - Desnivel
+positivo/negativo. - Altitud máxima/mínima. - Tipo de terreno. -
+Recomendaciones. - Perfil de altimetría. - Imagen. - Inicio y final.
+
+Ejemplo: Ruta de los Miradores 11,8 km 3 h 45 min +520 m Moderada
+Sendero + roca
+
+======================================================================
+HITO 6 – WAYPOINTS Y PUNTOS DE INTERÉS
+======================================================================
+
+Objetivo: Diferenciar los puntos que forman el trazado de los lugares
+relevantes.
+
+PUNTOS_RUTA: Sirven para dibujar el recorrido.
+
+PUNTOS_INTERES: - ID_PUNTO_INTERES - ID_RUTA - TIPO - NOMBRE -
+DESCRIPCION - LATITUD - LONGITUD - ALTITUD - ORDEN - IMAGEN - ACTIVO
+
+Tipos: - Inicio - Final - Mirador - Fuente - Refugio - Cruce - Zona
+peligrosa - Desprendimiento - Descanso - Aparcamiento - Punto natural
+
+======================================================================
+HITO 7 – MODO OFFLINE
+======================================================================
+
+Objetivo: Poder realizar la ruta sin cobertura.
+
+Antes de salir: DESCARGAR RUTA
+
+Guardar en el dispositivo: - Trazado. - Waypoints. - Información de
+ruta. - Datos necesarios para navegación. - Mapas offline. - Datos de la
+expedición.
+
+Durante: - GPS local. - Mapa local. - Cálculo de distancia/progreso
+local. - Guardado local del recorrido.
+
+Después: Al recuperar Internet, sincronizar: - Recorrido. -
+Estadísticas. - Descubrimientos. - Fotografías. - Progreso.
+
+Tecnologías a investigar: - Mapbox. - OpenStreetMap. - osmdroid. -
+Mapsforge.
+
+La elección debe tener en cuenta SDK, rendimiento, licencias y
+necesidades de mapas offline.
+
+======================================================================
+HITO 8 – BASE DE DATOS DE FLORA Y FAUNA
+======================================================================
+
+Objetivo: Crear el catálogo de naturaleza.
+
+ESPECIES - ID_ESPECIE - NOMBRE_COMUN - NOMBRE_CIENTIFICO - TIPO -
+SUBTIPO - DESCRIPCION - HABITAT - RAREZA - IMAGEN_PRINCIPAL -
+CURIOSIDADES - ACTIVA
+
+Tipos: Flora / Fauna
+
+Subtipos: Árbol, arbusto, flor, helecho, musgo, hongo, mamífero, ave,
+reptil, anfibio, insecto, arácnido, etc.
+
+======================================================================
+HITO 9 – ESPECIES ASOCIADAS A RUTAS
+======================================================================
+
+Objetivo: Saber qué especies puede encontrar el usuario en cada ruta.
+
+ESPECIE_RUTA - ID_ESPECIE - ID_RUTA - EPOCA_INICIO - EPOCA_FIN -
+PROBABILIDAD - OBSERVACIONES
+
+Ejemplo: Ruta de los Miradores: - Zorro rojo – probabilidad media. -
+Pino silvestre – probabilidad alta. - Buitre negro – probabilidad baja.
+
+======================================================================
+HITO 10 – SISTEMA DE DESCUBRIMIENTOS
+======================================================================
+
+Objetivo: Registrar un encuentro concreto del usuario con una especie.
+
+ESPECIE ≠ DESCUBRIMIENTO.
+
+ESPECIE: “Zorro rojo”.
+
+DESCUBRIMIENTO: “Sergio fotografió un zorro rojo el 8/09/2026 a las
+12:43 en la Ruta de los Miradores.”
+
+DESCUBRIMIENTOS - ID_DESCUBRIMIENTO - ID_USUARIO - ID_ESPECIE -
+ID_RUTA - FECHA_HORA - LATITUD - LONGITUD - ALTITUD - FOTO - NOTAS -
+METODO_IDENTIFICACION - CONFIRMADO
+
+======================================================================
+HITO 11 – POKÉDEX PERSONAL
+======================================================================
+
+Objetivo: Convertir los descubrimientos en una colección visual.
+
+Pantallas: - Todas. - Flora. - Fauna. - Descubiertas. - Pendientes. -
+Favoritas. - Especies de la ruta.
+
+Ejemplo de ficha: ZORRO ROJO Vulpes vulpes
+
+Descubierto ✓ Tus fotografías Localizaciones Último avistamiento Hábitat
+Curiosidades
+
+MAESTRÍA 2/5 ☑ Descubrir ☑ Fotografiar ☐ Encontrar en otra ruta ☐
+Completar reto ☐ Descubrimiento especial
+
+======================================================================
+HITO 12 – CÁMARA E IDENTIFICACIÓN CON IA
+======================================================================
+
+Objetivo: Hacer que una fotografía pueda convertirse en un
+descubrimiento.
+
+Flujo: Foto → IA → posibles especies → confianza → confirmación →
+descubrimiento → Pokédex.
+
+Ejemplo: “Probablemente: Orquídea silvestre” Confianza: 91 % Otras
+posibilidades: 9 %
+
+La IA debe considerarse una ayuda, no una autoridad absoluta. Debe
+existir confirmación, alternativas y posibilidad de corregir.
+
+======================================================================
+HITO 13 – RETOS Y OBJETIVOS
+======================================================================
+
+Objetivo: Convertir una ruta en una misión.
+
+RETOS - ID_RETO - ID_RUTA - TIPO - NOMBRE - DESCRIPCION - OBJETIVO -
+RECOMPENSA_XP - ACTIVO
+
+Ejemplos: “Descubre 3 árboles” → +100 XP. “Llega al mirador” → +50 XP.
+“Fotografía un pino silvestre” → +75 XP. “Completa la ruta” → +200 XP.
+
+======================================================================
+HITO 14 – XP, NIVELES E INSIGNIAS
+======================================================================
+
+Objetivo: Crear progresión.
+
+USUARIOS - ID_USUARIO - NOMBRE - EMAIL - FECHA_REGISTRO - NIVEL - XP -
+FOTO - ACTIVO
+
+INSIGNIAS - ID_INSIGNIA - NOMBRE - DESCRIPCION - IMAGEN - REQUISITO
+
+USUARIO_INSIGNIA - ID_USUARIO - ID_INSIGNIA - FECHA_OBTENCION
+
+Ejemplos: Primera cumbre. 50 árboles. 25 insectos. Primera ruta
+nocturna. 100 fotografías. 10 rutas completadas.
+
+======================================================================
+HITO 15 – PERFIL Y ESTADÍSTICAS
+======================================================================
+
+Objetivo: Mostrar la evolución del explorador.
+
+Ejemplo: Sergio Nivel 12 – Explorador
+
+37 rutas 142 plantas 83 animales 624 fotografías 428 km 18.430 m de
+desnivel
+
+También: - Progreso de flora. - Progreso de fauna. - Rutas. - Retos. -
+Insignias.
+
+======================================================================
+HITO 16 – MAPA PERSONAL
+======================================================================
+
+Objetivo: Crear un mapa de todo lo explorado.
+
+Mostrar: - Rutas completadas. - Descubrimientos. - Fotografías. -
+Lugares especiales. - Zonas visitadas.
+
+Cada descubrimiento puede abrir su ficha: Zorro rojo Ruta de los
+Miradores 08/09/2026 Foto.
+
+======================================================================
+HITO 17 – INFORMACIÓN CONTEXTUAL
+======================================================================
+
+Objetivo: Adaptar la experiencia al momento.
+
+Usar: - Ubicación. - Estación. - Hora. - Altitud. - Ecosistema. -
+Meteorología. - Historial.
+
+Ejemplo: “Estás en un bosque de pino a 1.600 m. Hoy podrías encontrar:
+buitre negro, corzo, apolo y piorno serrano. 2 todavía no están en tu
+colección.”
+
+======================================================================
+HITO 18 – ASISTENTE DE EXPLORACIÓN
+======================================================================
+
+Objetivo: Ayudar al usuario a decidir qué buscar.
+
+Funciones: - ¿Qué puedo encontrar aquí? - ¿Qué me falta? - ¿Qué objetivo
+tengo cerca? - ¿Qué especies son habituales? - ¿Qué rutas me interesan?
+
+======================================================================
+HITO 19 – FUNCIONES SOCIALES
+======================================================================
+
+Objetivo: Crear comunidad después de validar la experiencia individual.
+
+Funciones: - Amigos. - Seguidores. - Perfiles. - Compartir rutas. -
+Compartir descubrimientos. - Rankings. - Fotografías.
+
+======================================================================
+HITO 20 – EXPEDICIONES COOPERATIVAS
+======================================================================
+
+Objetivo: Permitir que varios usuarios compartan una misión.
+
+Ejemplo: “Descubramos la Sierra” Objetivo: 50 especies. Progreso: 37/50.
+
+======================================================================
+HITO 21 – CONSERVACIÓN Y EDUCACIÓN
+======================================================================
+
+Objetivo: Gamificar también el cuidado de la naturaleza.
+
+Ejemplos: - Mantenerse en el sendero. - No molestar animales. - Respetar
+zonas protegidas. - Aprender sobre especies. - Retos de limpieza o
+conservación cuando sean apropiados.
+
+No se deben revelar ubicaciones sensibles de especies vulnerables ni
+incentivar acercamientos peligrosos.
+
+======================================================================
+HITO 22 – FUNCIONES AVANZADAS
+======================================================================
+
+Objetivo: Explorar diferenciadores cuando el núcleo sea estable.
+
+Posibilidades: - Identificación por sonido. - Cantos de aves. -
+Audio-guía. - Smartwatch. - Realidad aumentada. - Temporadas. -
+Eventos. - Rutas temáticas. - Integración con parques naturales. - Uso
+educativo.
+
+======================================================================
+HITO 23 – CALIDAD Y BETA
+======================================================================
+
+Objetivo: Probar la aplicación en condiciones reales.
+
+Comprobar: - Batería. - Precisión GPS. - Pérdida de señal. -
+Recuperación de señal. - Offline. - Sincronización. - Cierres. -
+Permisos. - Privacidad. - Rendimiento.
+
+Probar: - Ruta corta. - Ruta larga. - Buena cobertura. - Sin
+cobertura. - Bosque. - Montaña. - Modo avión. - Batería baja.
+
+======================================================================
+HITO 24 – VERSIÓN 1.0
+======================================================================
+
+Objetivo: Primera versión pública estable.
+
+Mínimo: - Registro/login. - Zonas. - Rutas. - Mapa. - GPS. -
+Seguimiento. - Offline. - Waypoints. - Información de ruta. -
+Flora/fauna. - Descubrimientos. - Fotografía. - Pokédex. - Retos. -
+XP. - Perfil. - Historial. - Estadísticas.
+
+======================================================================
+ESTRUCTURA EVOLUTIVA DE LA BASE DE DATOS
+======================================================================
+
+FASE 1: ZONAS ↓ RUTAS ↓ PUNTOS_RUTA
+
+FASE 2: RUTAS ├── PUNTOS_RUTA └── PUNTOS_INTERES
+
+FASE 3: RUTAS └── ESPECIE_RUTA ↓ ESPECIES ↑ DESCUBRIMIENTOS ↑ USUARIOS
+
+FASE 4: USUARIOS ├── EXPEDICIONES ├── RETOS ├── INSIGNIAS └──
+ESTADÍSTICAS
+
+No es necesario crear todas las tablas desde el principio.
+
+======================================================================
+ORACLE Y DATOS GEOESPACIALES
+======================================================================
+
+Como el proyecto utiliza Oracle, conviene estudiar Oracle Spatial y
+SDO_GEOMETRY.
+
+A largo plazo podría representar: - Puntos. - Líneas. - Rutas. -
+Zonas. - Áreas. - Posiciones.
+
+Esto facilitaría consultas geográficas como: - ¿Qué waypoint está a
+menos de 200 metros? - ¿Dónde está el usuario respecto a la ruta? - ¿Qué
+especies están asociadas a esta zona? - ¿Está el usuario dentro de una
+zona?
+
+La decisión definitiva debe hacerse al concretar la arquitectura
+técnica.
+
+======================================================================
+DATOS EN ORACLE VS DATOS LOCALES
+======================================================================
+
+ORACLE: - Zonas. - Rutas. - Puntos. - Waypoints. - Especies. - Retos. -
+Usuarios. - Descubrimientos. - Estadísticas. - Progreso sincronizado.
+
+MÓVIL: - GPS actual. - Ruta descargada. - Mapa offline. - Waypoints
+descargados. - Datos de navegación. - Progreso temporal. - Fotografías
+pendientes de subir.
+
+PRINCIPIO: Oracle proporciona los datos persistentes; el dispositivo
+debe poder ejecutar la navegación sin depender de Internet.
+
+======================================================================
+ROADMAP DE VERSIONES
+======================================================================
+
+ALFA 0.1 Hito 1–4 Ruta + mapa + GPS + inicio + final + seguimiento.
+
+ALFA 0.2 Hito 5–6 Información avanzada + waypoints.
+
+ALFA 0.3 Hito 7 Offline.
+
+ALFA 0.4 Hito 8–11 Naturaleza + descubrimientos + Pokédex.
+
+ALFA 0.5 Hito 12–14 IA + retos + gamificación.
+
+BETA 0.9 Hito 15–23 Perfil + estadísticas + asistente + social +
+calidad.
+
+V1.0 Hito 24 Primera versión pública estable.
+
+======================================================================
+PRIORIDAD
+======================================================================
+
+PRIORIDAD MÁXIMA: GPS, mapa, ruta, inicio/final, seguimiento, distancia,
+tiempo, progreso, offline.
+
+PRIORIDAD ALTA: Waypoints, altimetría, información, especies,
+descubrimientos, Pokédex.
+
+PRIORIDAD MEDIA: IA, retos, XP, insignias, perfil.
+
+PRIORIDAD FUTURA: Social, cooperativo, eventos, audio, realidad
+aumentada, smartwatch.
+
+======================================================================
+SIGUIENTE PASO
+======================================================================
+
+El siguiente paso recomendado es convertir el HITO 1 en un documento
+técnico concreto.
+
+Definir: 1. Tecnología Android. 2. SDK de mapas. 3. Sistema GPS. 4.
+Estructura exacta de Oracle. 5. API entre aplicación y backend/base de
+datos. 6. Formato de la ruta. 7. Cómo descargarla. 8. Cómo almacenarla
+localmente. 9. Algoritmo de progreso. 10. Detección de inicio. 11.
+Detección de final. 12. Gestión de pérdida de cobertura. 13. Gestión de
+cierre de aplicación. 14. Recuperación de GPS. 15. Sincronización
+posterior.
+
+======================================================================
+DEFINICIÓN DEL PRIMER GRAN ÉXITO
+======================================================================
+
+“Abro la aplicación, selecciono una zona, selecciono una ruta, pulso
+empezar, la aplicación sabe dónde estoy, me guía hasta el inicio,
+detecta que he llegado, comienzo la ruta, veo mi posición sobre el
+trazado, veo distancia, tiempo, progreso y altitud, llego al final, la
+aplicación lo detecta y guarda la expedición.”
+
+Si esto funciona, ya existe el corazón de la aplicación.
+
+Después se puede construir encima: NATURALEZA → DESCUBRIMIENTOS →
+POKÉDEX → RETOS → XP → COMUNIDAD.
+
+VISIÓN FINAL: Cada ruta es una aventura. Cada especie es un
+descubrimiento. Cada descubrimiento forma parte de una colección. Cada
+expedición aumenta la experiencia del explorador.

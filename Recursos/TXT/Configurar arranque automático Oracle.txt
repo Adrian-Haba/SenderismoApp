@@ -1,0 +1,4 @@
+CMD como administrador: sc config OracleServiceFREE start= auto
+CMD como administrador: sc config OracleOraDB23Home1TNSListener start= auto
+CMD normal: reinicia Windows y ejecuta lsnrctl status.
+SQL*Plus como administrador: sqlplus / as sysdba → show pdbs; → debe aparecer FREEPDB1 como READ WRITE.

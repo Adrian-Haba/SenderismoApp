@@ -1,0 +1,73 @@
+Paso 1 — Crear carpeta del proyecto
+
+En la VM, abre una terminal y ejecuta:
+
+mkdir SenderismoAPI
+cd SenderismoAPI
+------------------------------------------------------------------------------------
+Paso 2 — Crear un entorno virtual
+
+Ejecuta:
+
+python -m venv venv
+
+Después actívalo:
+
+venv\Scripts\activate
+
+Si todo ha ido bien, al principio de la terminal debería aparecer algo parecido a:
+
+(venv) C:\...\SenderismoAPI>
+-------------------------------------------------------------------------------------
+Paso 3 — Instalar FastAPI
+
+Con el entorno virtual activado:
+
+pip install fastapi uvicorn
+
+Esto instalará nuestro servidor web.
+-------------------------------------------------------------------------------------
+Paso 4 — Crear main.py
+
+Dentro de SenderismoAPI, crea un archivo llamado:
+
+main.py
+
+Y pon exactamente esto:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+def inicio():
+    return {
+        "mensaje": "SenderismoAPI funcionando"
+    }
+--------------------------------------------------------------------------------------
+Paso 5 — Arrancar la API
+
+Desde la carpeta SenderismoAPI y con (venv) activo:
+
+uvicorn main:app --reload
+
+Deberías ver algo parecido a:
+
+Uvicorn running on http://127.0.0.1:8000
+
+Ahora abre el navegador de la VM y entra en:
+
+http://127.0.0.1:8000
+
+Si todo está correcto, aparecerá:
+
+{
+  "mensaje": "SenderismoAPI funcionando"
+}
+
+Y FastAPI además nos proporciona automáticamente una interfaz para probar los endpoints en:
+
+http://127.0.0.1:8000/docs
+
+Haz hasta aquí solamente. Si ves SenderismoAPI funcionando, ya tendremos nuestro primer backend levantado y el siguiente paso será instalar el conector de Python para Oracle y hacer la primera consulta real a la base de datos.
